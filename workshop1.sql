@@ -93,7 +93,7 @@ CREATE TABLE employees_territories(
 CREATE TABLE offices (
     id SERIAL,
     address_line TEXT NOT NULL,
-    territory_id INT NOT NULL,
+    territory_id INT UNIQUE NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -159,11 +159,11 @@ REFERENCES suppliers;
 -- TODO create more constraints here...
 
 ALTER TABLE employees
-ADD reports_to INT UNIQUE;
+ADD COLUMN reports_to INT UNIQUE;
 
 ALTER TABLE employees
 ADD CONSTRAINT fk_employees_employees
-FOREIGN KEY(employee_id) 
+FOREIGN KEY(reports_to) 
 REFERENCES employees;
 
 
